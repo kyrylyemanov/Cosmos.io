@@ -1,0 +1,244 @@
+/* --- ЗМІННІ (СВІТЛА ТЕМА ЗА ЗМОВЧУВАННЯМ) --- */
+:root {
+    --bg-white: #FEFDFE;
+    --bg-grey: #F2F2F2;
+    --card-bg: #FFFFFF;
+    
+    --text-dark: #211F21;      /* Заголовки, лого */
+    --text-mid: #454446;       /* Основний текст */
+    --text-light: #878588;     /* Підписи */
+    --text-very-light: #A4A2A3; /* Дрібний текст */
+    
+    --border-color: #D3D3D3;
+    
+    --logo-filter: brightness(0); /* Робить картинку лого чорною */
+    
+    --btn-bg: #0F0F10;
+    --btn-text: #BDBDBC;
+}
+
+/* --- ЗМІННІ (ТЕМНА ТЕМА) --- */
+body.dark-theme {
+    --bg-white: #121212;
+    --bg-grey: #1A1A1A;
+    --card-bg: #1F1F1F;
+    
+    --text-dark: #FDFCFD;
+    --text-mid: #D1CFD1;
+    --text-light: #A4A2A3;
+    --text-very-light: #878588;
+    
+    --border-color: #333333;
+    
+    --logo-filter: brightness(0) invert(1); /* Робить картинку лого білою */
+    
+    --btn-bg: #E0E0E0;
+    --btn-text: #121212;
+}
+
+/* --- БАЗОВІ НАЛАШТУВАННЯ --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Syne', sans-serif;
+    background-color: var(--bg-white);
+    color: var(--text-mid);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    line-height: 1.5;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+a:hover { color: var(--text-dark); }
+ul { list-style: none; }
+img { max-width: 100%; height: auto; display: block; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; color: var(--text-dark); transition: color 0.3s ease; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* --- ШАПКА --- */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Лого зліва, кнопка справа */
+    padding: 30px 5%; 
+    width: 100%;
+    z-index: 10;
+    position: relative;
+    background-color: var(--bg-white);
+    transition: background-color 0.3s ease;
+}
+
+.logo { display: flex; align-items: center; gap: 8px; }
+.logo-icon { width: 48px; height: 48px; object-fit: contain; filter: var(--logo-filter); transition: filter 0.3s ease; }
+.logo-text { font-family: 'DM Serif Display', serif; font-size: 24px; color: var(--text-dark); transition: color 0.3s ease; }
+
+.nav { position: absolute; left: 50%; transform: translateX(-50%); }
+.nav-list { display: flex; gap: 30px; }
+.nav-list a { font-size: 16px; color: var(--text-light); }
+.nav-list a:hover { color: var(--text-dark); }
+
+/* --- КНОПКА ТЕМИ ТА АНІМАЦІЯ --- */
+.theme-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--text-dark);
+    position: relative;
+    transition: transform 0.3s, border-color 0.3s, background-color 0.3s;
+}
+.theme-btn:hover { transform: scale(1.1); background-color: var(--bg-grey); }
+
+/* Анімація "Зірочка вилітає" */
+.theme-btn::after {
+    content: '✨';
+    position: absolute;
+    font-size: 16px;
+    opacity: 0;
+    pointer-events: none;
+}
+.theme-btn.animate-star::after {
+    animation: starFly 0.6s ease-out forwards;
+}
+
+@keyframes starFly {
+    0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+    30% { opacity: 1; }
+    100% { transform: translate(30px, -30px) scale(1.5) rotate(45deg); opacity: 0; }
+}
+
+/* --- ГОЛОВНА (HERO) --- */
+.hero {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 20px;
+    position: relative; 
+    width: 100%;
+}
+.hero-content { max-width: 656px; display: flex; flex-direction: column; align-items: center; gap: 30px; position: relative; z-index: 5; }
+.hero-title { font-weight: 600; font-size: 60px; line-height: 1.13; color: var(--text-dark); }
+.hero-subtitle { font-size: 17px; line-height: 1.5; color: var(--text-light); max-width: 552px; }
+
+.main-btn {
+    display: inline-flex; justify-content: center; align-items: center;
+    width: 156px; height: 57px; border-radius: 4px; font-weight: 600; font-size: 15px;
+    background-color: var(--btn-bg); color: var(--btn-text);
+    transition: opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+.main-btn:hover { opacity: 0.8; }
+
+.hero-visuals { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+.boouul-block { position: absolute; width: 396px; top: -120px; left: 0; filter: drop-shadow(40px 0px 61px rgba(0, 0, 0, 0.15)); }
+.wave-shape { position: absolute; width: 603px; bottom: 0; right: 0; }
+
+/* Зробимо картинки трохи приглушеними у темній темі, щоб не били по очах */
+body.dark-theme .boouul-block, body.dark-theme .wave-shape { filter: opacity(0.3) grayscale(0.5); }
+
+/* --- СЕКЦІЇ ТА ФОНИ --- */
+.section-white { background-color: var(--bg-white); }
+.section-grey { background-color: var(--bg-grey); }
+
+/* --- ПРО ГАЛУЗЬ --- */
+.industry-section { padding: 80px 20px; display: flex; flex-direction: column; align-items: center; }
+.section-title { font-size: 42px; font-weight: 600; margin-bottom: 20px; text-align: center; }
+.section-subtitle { font-size: 17px; color: var(--text-light); text-align: center; max-width: 600px; margin-bottom: 60px; }
+
+.cards-container { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
+.info-card { width: 365px; border: 1px solid var(--border-color); background-color: var(--card-bg); display: flex; flex-direction: column; align-items: center; text-align: center; padding: 50px 35px 35px; transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s; }
+.info-card:hover { transform: translateY(-5px); }
+.card-icon-wrap { width: 55px; height: 55px; background-color: var(--text-dark); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 30px; color: var(--bg-white); font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 600; transition: background-color 0.3s, color 0.3s; }
+.info-card h3 { font-size: 30px; margin-bottom: 5px; }
+.card-sub { font-size: 16px; color: var(--text-light); margin-bottom: 20px; display: block; }
+
+/* --- ПОДОРОЖ --- */
+.journey-section { padding: 80px 20px; display: flex; justify-content: center; }
+.journey-container { display: flex; align-items: center; gap: 60px; max-width: 900px; }
+.journey-image img { width: 360px; height: 364px; object-fit: cover; border-radius: 11px; }
+.journey-content { display: flex; flex-direction: column; gap: 20px; max-width: 460px; }
+.journey-title { font-size: 42px; }
+.journey-text { font-size: 17px; }
+.journey-actions { display: flex; align-items: center; gap: 25px; margin-top: 10px; }
+.btn-text { font-size: 17px; color: var(--text-mid); font-weight: 600; transition: color 0.3s; }
+.btn-text:hover { color: var(--text-dark); }
+
+/* --- ПРОДУКТИ (СІТКА) --- */
+.section { padding: 100px 0; }
+.grid-3-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+
+.card { background-color: var(--card-bg); border-radius: 4px; transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, border-color 0.3s ease; }
+.card:hover { transform: translateY(-5px); }
+.border-card { border: 1px solid var(--border-color); padding: 40px 30px; }
+.flat-card { padding: 40px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+
+body.dark-theme .flat-card { box-shadow: 0 4px 20px rgba(0,0,0,0.3); } /* Тінь для темної теми */
+
+.card-title { font-size: 24px; font-weight: 600; margin-bottom: 15px; }
+.card-text { font-size: 16px; color: var(--text-light); margin-bottom: 25px; }
+.text-center { text-align: center; }
+.card-sub-text { font-size: 15px; color: var(--text-light); }
+.card-footer-flex { display: flex; justify-content: space-between; font-size: 14px; color: var(--text-very-light); margin-top: 20px; }
+.px-20 { padding: 0 20px; }
+
+/* BENTO GRID */
+.bento-grid { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 20px; }
+.bento-col { display: flex; flex-direction: column; gap: 20px; }
+.bento-center .center-large { height: 100%; display: flex; flex-direction: column; justify-content: center; }
+.small-pad { padding: 25px; }
+.card-top-tags { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-light); margin-bottom: 20px; }
+.light-tag { color: var(--text-very-light); }
+.mb-5 { margin-bottom: 5px; }
+.mb-15 { margin-bottom: 15px; }
+.mb-30 { margin-bottom: 30px; }
+
+/* КОЛА ДЛЯ КАРТИНОК */
+.card-image { margin: 0 auto 30px auto; border-radius: 50%; overflow: hidden; background-color: var(--bg-grey); transition: background-color 0.3s ease; }
+.card-image img { width: 100%; height: 100%; object-fit: cover; }
+.card-image.normal { width: 180px; height: 180px; }
+.card-image.large { width: 220px; height: 220px; }
+.card-image.hero-circle { width: 280px; height: 280px; }
+
+/* --- ФУТЕР --- */
+.footer { background-color: var(--bg-grey); padding: 80px 0; margin-top: auto; transition: background-color 0.3s ease; }
+.footer-container { display: flex; align-items: flex-start; justify-content: center; gap: 100px; }
+.footer-logo { width: 96px; height: 96px; position: relative; }
+.logo-circles { position: relative; width: 60px; height: 60px; top: 10px; }
+.circle { width: 40px; height: 40px; border-radius: 50%; position: absolute; transition: border-color 0.3s, background-color 0.3s; }
+.circle-light { border: 3px solid var(--text-dark); background: var(--bg-white); top: 0; left: 0; z-index: 2; }
+.circle-dark { background: var(--text-dark); top: 15px; left: 15px; z-index: 1; }
+.footer-links-group { display: flex; gap: 80px; }
+.footer-col { display: flex; flex-direction: column; gap: 20px; }
+.footer-title { font-size: 16px; font-weight: 600; color: var(--text-light); margin-bottom: 10px; }
+.footer-list { display: flex; flex-direction: column; gap: 15px; }
+.footer-list li a { font-size: 15px; color: var(--text-light); }
+.footer-list li a:hover { color: var(--text-dark); }
+
+/* --- АДАПТИВНІСТЬ --- */
+@media (max-width: 992px) {
+    .bento-grid { grid-template-columns: 1fr; }
+    .footer-container { flex-direction: column; align-items: center; gap: 50px; }
+    .footer-links-group { flex-direction: column; text-align: center; gap: 40px; }
+    .journey-container { flex-direction: column; text-align: center; }
+    .journey-actions { justify-content: center; }
+    .nav { position: static; transform: none; margin: 0 auto; }
+    .header { flex-wrap: wrap; gap: 20px; justify-content: center; }
+    .theme-btn { position: absolute; right: 5%; top: 30px; }
+}
