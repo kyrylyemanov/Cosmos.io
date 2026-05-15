@@ -17,6 +17,19 @@
     --btn-text: #BDBDBC;
 }
 
+/* Стиль для посилання авторизації в меню */
+.nav-list li a[href="auth.html"] {
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-list li a[href="auth.html"]:hover {
+    background-color: var(--text-dark);
+    color: var(--bg-white) !important;
+}
+
 /* --- ЗМІННІ (ТЕМНА ТЕМА) --- */
 body.dark-theme {
     --bg-white: #121212;
