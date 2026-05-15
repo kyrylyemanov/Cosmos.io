@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmos - Авторизація</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@600&family=Syne:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+.error-message {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin-bottom: 5px;
+    min-height: 15px; /* Щоб верстка не стрибала */
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.error-message.show {
+    opacity: 1;
+}
+
+/* Підсвітка бордера поля при помилці */
+input.input-error {
+    border-color: #ff4d4d !important;
+}
+
+        /* Специфічні стилі для сторінки авторизації */
+        .auth-body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .auth-close {
+            position: absolute;
+            top: 40px;
+            right: 5%;
+            font-size: 32px;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .auth-close:hover {
+            transform: rotate(90deg);
+        }
+        .auth-card {
+            width: 100%;
+            max-width: 450px;
+            padding: 50px;
+            background: var(--bg-grey);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        .auth-tabs {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .auth-tab {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            color: var(--text-light);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 5px;
+        }
+        .auth-tab.active {
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--text-dark);
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: var(--text-mid);
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-white);
+            border-radius: 4px;
+            font-family: 'Syne', sans-serif;
+            color: var(--text-dark);
+            outline: none;
+        }
+        .auth-btn {
+            width: 100%;
+            margin-top: 10px;
+            cursor: pointer;
+            border: none;
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="auth-body">
+
+    <a href="index.html" class="auth-close">✕</a>
+
+    <div class="auth-card">
+        <div class="auth-tabs">
+            <span class="auth-tab active" id="tab-login">Вхід</span>
+            <span class="auth-tab" id="tab-register">Реєстрація</span>
+        </div>
+
+        <form id="form-login" novalidate>
+    <div class="form-group">
+        <label>Електронна пошта</label>
+        <div class="error-message" id="error-login-email"></div> <input type="email" id="login-email" placeholder="email@example.com" required>
+    </div>
+    <div class="form-group">
+        <label>Пароль</label>
+        <div class="error-message" id="error-login-password"></div> <input type="password" id="login-password" placeholder="••••••••" required>
+    </div>
+    <button type="submit" class="main-btn auth-btn">Увійти</button>
+</form>
+
+<form id="form-register" class="hidden" novalidate>
+    <div class="form-group">
+        <label>Повне ім'я</label>
+        <div class="error-message" id="error-reg-name"></div> <input type="text" id="reg-name" placeholder="Іван Іванов" required>
+    </div>
+    <div class="form-group">
+        <label>Електронна пошта</label>
+        <div class="error-message" id="error-reg-email"></div> <input type="email" id="reg-email" placeholder="email@example.com" required>
+    </div>
+    <div class="form-group">
+        <label>Пароль</label>
+        <div class="error-message" id="error-reg-password"></div> <input type="password" id="reg-password" placeholder="Мінімум 8 символів" required>
+    </div>
+    <button type="submit" class="main-btn auth-btn">Створити акаунт</button>
+</form>
+    </div>
+
+    <script src="auth.js"></script>
+</body>
+</html>
